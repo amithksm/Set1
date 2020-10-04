@@ -29,7 +29,7 @@ public class StudentEntity {
 	private String gender;
 	
 	@OneToMany(mappedBy = "student", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private Set<DemographicsEntity> assignments;
+    private Set<DemographicsEntity> address;
 	
 	
 	public Long getId() {
@@ -56,11 +56,12 @@ public class StudentEntity {
 	public void setGender(String gender) {
 		this.gender = gender;
 	}
-	public Set<DemographicsEntity> getAssignments() {
-		return assignments;
+	public Set<DemographicsEntity> getAddress() {
+		return address;
 	}
-	public void setAssignments(Set<DemographicsEntity> assignments) {
-		this.assignments = assignments;
+	public void setAddress(Set<DemographicsEntity> address) {
+		this.address = address;
 	}
+	
 	
 }

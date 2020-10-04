@@ -10,6 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -23,6 +24,7 @@ public class StudentEntity {
 	
 	private String name;
 	
+	@Column(name = "roll_number")
 	private Integer rollNum;
 	
 	@Column(length = 1)
@@ -30,6 +32,9 @@ public class StudentEntity {
 	
 	@OneToMany(mappedBy = "student", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<DemographicsEntity> address;
+	
+	@OneToOne(mappedBy = "student", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	private ContactEntity contactInfo;
 	
 	
 	public Long getId() {
@@ -61,6 +66,12 @@ public class StudentEntity {
 	}
 	public void setAddress(Set<DemographicsEntity> address) {
 		this.address = address;
+	}
+	public ContactEntity getContactInfo() {
+		return contactInfo;
+	}
+	public void setContactInfo(ContactEntity contactInfo) {
+		this.contactInfo = contactInfo;
 	}
 	
 	

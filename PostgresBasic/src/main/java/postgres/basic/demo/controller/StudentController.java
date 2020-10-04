@@ -40,8 +40,8 @@ public class StudentController {
 	}
 	
 	@GetMapping("/students/student/{roll-num}")
-	public StudentEntity getStudentByRollNum(@PathVariable("roll-num") Integer id){
-		return studentService.getStudentByRollNum(id);
+	public StudentEntity getStudentByRollNum(@PathVariable("roll-num") Integer rollNum){
+		return studentService.getStudentByRollNum(rollNum);
 	}
 	
 	@DeleteMapping("/students/{id}")

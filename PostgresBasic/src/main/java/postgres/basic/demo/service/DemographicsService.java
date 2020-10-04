@@ -1,5 +1,6 @@
 package postgres.basic.demo.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -64,6 +65,28 @@ public class DemographicsService {
 			return demogRepo.save(newAddress);
 		}
 		throw new NotFoundException("Student not found with roll num "+rollNum);
+	}
+
+	public String deleteAllAddressOfStudent(Integer rollNum) {
+		
+		if(studentRepo.findByRollNum(rollNum).isPresent()) {
+			Long studentId = studentRepo.findByRollNum(rollNum).get().getId();
+			List<DemographicsEntity> addresses = new ArrayList<DemographicsEntity>();
+			addresses.addAll(demogRepo.findByStudentId(studentId));
+			for(DemographicsEntity de : addresses) {
+				demogRepo.delete(de);
+			}
+			return "Address deleted successfully";
+		}
+		throw new NotFoundException("No address found for roll num "+rollNum);
+	}
+
+	public String deleteAddressByDemogId(Long demogId) {
+		if(demogRepo.findById(demogId).isPresent()) {
+			demogRepo.delete(demogRepo.findById(demogId).get());
+			return "Student address deleted successfully";
+		}
+		throw new NotFoundException("Demographics details not found for demographics id "+ demogId);
 	}
 
 	

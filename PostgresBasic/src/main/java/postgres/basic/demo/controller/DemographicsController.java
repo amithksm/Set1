@@ -4,6 +4,7 @@ import java.util.List;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -42,8 +43,18 @@ public class DemographicsController {
 		return demogService.getAddressByStudentRollNum(rollNum);
 	}
 	
-	@GetMapping("/demographics/{id}")
-	public DemographicsEntity addressByDemogId(@PathVariable("id") Long id){
+	@GetMapping("/demographics/{demog-id}")
+	public DemographicsEntity addressByDemogId(@PathVariable("demog-id") Long id){
 		return demogService.addressByDemogId(id);
+	}
+	
+	@DeleteMapping("/students/student/{roll-num}/demographics")
+	public String deleteAddressByRollNum(@PathVariable("roll-num") Integer rollNum) {
+		return demogService.deleteAllAddressOfStudent(rollNum);
+	}
+	
+	@DeleteMapping("/demographics/{demog-id}")
+	public String deleteAddressByDemogId(@PathVariable("demog-id") Long demogId) {
+		return demogService.deleteAddressByDemogId(demogId);
 	}
 }

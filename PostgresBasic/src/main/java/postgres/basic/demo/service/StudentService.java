@@ -44,11 +44,10 @@ public class StudentService {
 	}
 
 	public String deleteStudent(Long id) {
-		studentRepo.findById(id).map(student -> {
+		return studentRepo.findById(id).map(student -> {
 			studentRepo.delete(student);
-			return "Student delete successfully";
+			return "Student deleted successfully";
 		}).orElseThrow(() -> new NotFoundException("Student not found with id "+id));
-		return null;
 	}
 
 	public StudentEntity getStudentByRollNum(Integer rollNum) {
@@ -57,6 +56,16 @@ public class StudentService {
 		if(student.isPresent())
 			return student.get();
 		throw new NotFoundException("Student not found with roll number "+rollNum);
+	}
+
+	public String deleteStudentByRollNum(Integer rollNum) {
+		
+		if(studentRepo.findByRollNum(rollNum).isPresent()) {
+			studentRepo.delete(studentRepo.findByRollNum(rollNum).get());
+			return "Student deleted successfully";
+		}
+		throw new NotFoundException("Student not found with roll number "+rollNum);
+		
 	}
 
 }

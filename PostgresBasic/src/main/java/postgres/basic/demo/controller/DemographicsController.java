@@ -23,13 +23,23 @@ public class DemographicsController {
 	DemographicsService demogService;
 	
 	@PostMapping("/students/{id}/demographics")
-	public DemographicsEntity addAddress(@Valid @RequestBody DemographicsDTO address, @PathVariable Long id) {
-		return demogService.saveAddress(id , address);
+	public DemographicsEntity addAddressById(@Valid @RequestBody DemographicsDTO address, @PathVariable Long id) {
+		return demogService.saveAddressById(id , address);
+	}
+	
+	@PostMapping("/students/student/{roll-num}")
+	public DemographicsEntity addAddressByRollNum(@Valid @RequestBody DemographicsDTO address, @PathVariable("roll-num") Integer rollNum) {
+		return demogService.saveAddressByRollNum(rollNum , address);
 	}
 	
 	@GetMapping("/students/{id}/demographics")
-	public List<DemographicsEntity> studentAddress(@PathVariable("id") Long id){
-		return demogService.getAddress(id);
+	public List<DemographicsEntity> studentAddressById(@PathVariable("id") Long id){
+		return demogService.getAddressByStudentId(id);
+	}
+	
+	@GetMapping("/students/student/{roll-num}/demographics")
+	public List<DemographicsEntity> studentAddressByRollNum(@PathVariable("roll-num") Integer rollNum){
+		return demogService.getAddressByStudentRollNum(rollNum);
 	}
 	
 	@GetMapping("/demographics/{id}")

@@ -45,10 +45,13 @@ public class StudentController {
 	}
 	
 	@DeleteMapping("/students/{id}")
-	public String deleteStudent(@PathVariable Long id) {
+	public String deleteStudentById(@PathVariable Long id) {
 		return studentService.deleteStudent(id);
 	}
 	
-	
+	@DeleteMapping("/students/student/{roll-num}")
+	public String deleteStudentByRollNum(@PathVariable("roll-num") Integer rollNum) {
+		return studentService.deleteStudentByRollNum(rollNum);
+	}
 
 }

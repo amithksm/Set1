@@ -2,6 +2,8 @@ package postgres.basic.demo.service;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,7 +22,7 @@ public class DemographicsService {
 	@Autowired
 	IDemographicsRepo demogRepo;
 	
-	public DemographicsEntity saveAddress(Long studentId, DemographicsDTO address){
+	public DemographicsEntity saveAddressById(Long studentId, DemographicsDTO address){
 		
 		if(studentRepo.findById(studentId).isPresent()) {
 			DemographicsEntity newAddress = new DemographicsEntity();
@@ -34,8 +36,16 @@ public class DemographicsService {
 		
 	}
 
-	public List<DemographicsEntity> getAddress(Long studentId) {
+	public List<DemographicsEntity> getAddressByStudentId(Long studentId) {
 		return (List<DemographicsEntity>) demogRepo.findByStudentId(studentId);
+	}
+	
+	public List<DemographicsEntity> getAddressByStudentRollNum(Integer rollNum) {
+		if(studentRepo.findByRollNum(rollNum).isPresent()) {
+			Long id = studentRepo.findByRollNum(rollNum).get().getId();
+			return getAddressByStudentId(id);
+		}
+		throw new NotFoundException("Student not found with roll num "+rollNum);
 	}
 
 	public DemographicsEntity addressByDemogId(Long id) {
@@ -43,4 +53,18 @@ public class DemographicsService {
 			return demogRepo.findById(id).get();
 		throw new NotFoundException("Demographics details not found for id "+ id);
 	}
+
+	public DemographicsEntity saveAddressByRollNum(Integer rollNum, @Valid DemographicsDTO address) {
+		if(studentRepo.findByRollNum(rollNum).isPresent()) {
+			DemographicsEntity newAddress = new DemographicsEntity();
+			newAddress.setAddress1(address.getAddress1());
+			newAddress.setAddress2(address.getAddress2());
+			newAddress.setPincode(address.getPinCode());
+			newAddress.setStudent(studentRepo.findByRollNum(rollNum).get());
+			return demogRepo.save(newAddress);
+		}
+		throw new NotFoundException("Student not found with roll num "+rollNum);
+	}
+
+	
 }

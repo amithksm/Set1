@@ -31,9 +31,11 @@ public class StudentEntity {
 	private String gender;
 	
 	@OneToMany(mappedBy = "student", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	//mappedBy = "student" refers to the Class member student in the DemgraphicsEntity.class
     private Set<DemographicsEntity> address;
 	
 	@OneToOne(mappedBy = "student", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	//mappedBy = "student" refers to the Class member student in the ContactEntity.class
 	private ContactEntity contactInfo;
 	
 	

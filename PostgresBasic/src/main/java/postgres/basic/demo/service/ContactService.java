@@ -1,5 +1,8 @@
 package postgres.basic.demo.service;
 
+import java.util.List;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -27,6 +30,16 @@ public class ContactService {
 			return contactRepo.save(ce);
 		}throw new NotFoundException("Student details not found with roll num "+rollNum);
 		
+	}
+
+	public List<ContactEntity> getContactInfo(String mobile) {
+		
+		return contactRepo.findByMobileNum(mobile);
+	}
+
+	public ContactEntity getContactById(Long id) {
+		Optional<ContactEntity> ce = contactRepo.findById(id);
+		return ce.get();
 	}
 	
 }

@@ -1,4 +1,4 @@
-package com.example.demo.controller.enumconverter;
+package com.example.demo.enumconverter;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.Target;

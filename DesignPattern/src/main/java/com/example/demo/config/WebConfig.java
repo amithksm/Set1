@@ -9,7 +9,7 @@ import org.springframework.core.convert.converter.Converter;
 import org.springframework.format.FormatterRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
-import com.example.demo.controller.enumconverter.RequestParamConverter;
+import com.example.demo.enumconverter.RequestParamConverter;
 
 @Configuration
 public class WebConfig implements WebMvcConfigurer{

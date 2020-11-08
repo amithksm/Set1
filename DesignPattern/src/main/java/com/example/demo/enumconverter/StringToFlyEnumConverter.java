@@ -1,4 +1,4 @@
-package com.example.demo.controller.enumconverter;
+package com.example.demo.enumconverter;
 
 import org.springframework.core.convert.converter.Converter;
 

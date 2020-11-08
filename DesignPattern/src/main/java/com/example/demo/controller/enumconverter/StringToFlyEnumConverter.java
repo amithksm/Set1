@@ -9,13 +9,7 @@ public class StringToFlyEnumConverter implements Converter<String, FlyEnum> {
 
 	@Override
 	public FlyEnum convert(String source) {
-		try {
 			return FlyEnum.decode(source);
-		} catch (InvalidEnumValueException e) {
-			e.printStackTrace();
-			return null;
-		}
-		
 	}
 
 }

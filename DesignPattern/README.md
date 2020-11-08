@@ -1,11 +1,19 @@
 #Design Patterns
 
-Strategy design pattern: Duck fly behaviour
-Factory Method design pattern: Duck creation - MALLARD, RUBBER
+# Strategy design pattern: 
+	Duck fly behaviour at run time
+	
+# Factory Method design pattern: 
+	Duck creation - MALLARD, RUBBER
 
-Enumeraton: In tables, path variable, request param
-	    String to Enum, Enum to String conversion
-	    Custom exception handling (To do)
-
-Exception Handling:
+# Enumeraton: 
+	In tables, path variable, request param
+    String to Enum, Enum to String conversion	    
+    <https://stackoverflow.com/questions/36190246/handling-exception-in-spring-boot-rest-thrown-from-custom-converter>
+    
+# Exception Handling:
+	Custom exception handling (To do)
+	
+# Input validation - Hibernate Validator:
+	
 

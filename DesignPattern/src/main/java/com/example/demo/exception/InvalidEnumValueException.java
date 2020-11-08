@@ -1,12 +1,6 @@
 package com.example.demo.exception;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.stream.IntStream;
-
-import org.springframework.util.StringUtils;
-
-public class InvalidEnumValueException extends Exception{
+public class InvalidEnumValueException extends RuntimeException{
 	
 	/**
 	 * 

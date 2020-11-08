@@ -19,14 +19,13 @@ public enum FlyEnum {
 	}
 	
 	@JsonCreator
-	public static FlyEnum decode(final String inputFly) throws InvalidEnumValueException {
+	public static FlyEnum decode(final String inputFly) {
 		
 		return Stream.of(FlyEnum.values())
 			.filter(x -> x.flyingStyle.equals(inputFly))
 			.findFirst()
 			.orElseThrow(() -> new InvalidEnumValueException("Invalid FlyEnum "+inputFly));
-			//.orElse(null);
-		// To Do: throw custom exception and handle the exception global exception handler
+//		<https://stackoverflow.com/questions/36190246/handling-exception-in-spring-boot-rest-thrown-from-custom-converter>
 	}
 	
 	@JsonValue

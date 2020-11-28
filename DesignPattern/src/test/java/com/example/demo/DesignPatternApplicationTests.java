@@ -8,6 +8,7 @@ class DesignPatternApplicationTests {
 
 	@Test
 	void contextLoads() {
+		System.out.println("Testing junit 5");
 	}
 
 }

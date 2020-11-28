@@ -7,7 +7,7 @@
 	Duck creation - MALLARD, RUBBER
 
 # Enumeraton: 
-	In tables, path variable, request param
+	Enum used in tables, path variable, request param
     String to Enum, Enum to String conversion	    
     <https://stackoverflow.com/questions/36190246/handling-exception-in-spring-boot-rest-thrown-from-custom-converter>
     

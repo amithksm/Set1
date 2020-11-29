@@ -44,7 +44,7 @@ public class DuckController {
 	}
 	
 	@GetMapping("/ducks")
-	public List<DuckEntity> getAllDucks() {
+	public List<Duck> getAllDucks() {
 		
 		return duckService.getAll();
 	}

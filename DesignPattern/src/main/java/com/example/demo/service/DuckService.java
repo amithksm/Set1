@@ -39,11 +39,18 @@ public class DuckService {
 		return duckEntity;
 	}
 
-	public List<DuckEntity> getAll() {
+	public List<Duck> getAll() {
 
-		List<DuckEntity> allDucks = new ArrayList<>();
-		duckRepo.findAll().forEach(allDucks::add);
-		return allDucks;
+		List<Duck> duckList = new ArrayList<>();
+		duckRepo.findAll()
+				.forEach(duckEntity -> {
+							Duck newDuck = duckGenerator.generateDuck(duckEntity.getDuck());
+							newDuck.setColor(duckEntity.getColor());
+							newDuck.setSize(duckEntity.getSize());
+							newDuck.setDuckId(duckEntity.getId());
+							duckList.add(newDuck);
+						});
+		return duckList;
 
 	}
 

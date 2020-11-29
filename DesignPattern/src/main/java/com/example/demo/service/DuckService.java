@@ -47,20 +47,13 @@ public class DuckService {
 
 	}
 
-	public ResponseEntity<Duck> getById(Long id) {
-		Duck duck = getDuckById(id);
-		if (duck != null) {
-			return ResponseEntity.status(HttpStatus.OK).body(duck);
-		}
-		return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
-	}
-
 	public Duck getDuckById(Long id) {
 		Optional<DuckEntity> duck = duckRepo.findById(id);
 		if (duck.isPresent()) {
 			Duck newDuck = duckGenerator.generateDuck(duck.get().getDuck());
 			newDuck.setColor(duck.get().getColor());
 			newDuck.setSize(duck.get().getSize());
+			newDuck.setDuckId(duck.get().getId());
 			return newDuck;
 		}
 		return null;

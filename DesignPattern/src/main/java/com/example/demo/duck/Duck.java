@@ -23,6 +23,7 @@ public abstract class Duck{
 	public int size;
 	public ColorEnum color;
 	public DuckEnum duckType;
+	public Long duckId;
 	
 	public abstract String performFly();
 

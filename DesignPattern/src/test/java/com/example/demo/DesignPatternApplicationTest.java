@@ -4,11 +4,10 @@ import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class DesignPatternApplicationTests {
-
+public class DesignPatternApplicationTest {
+	
 	@Test
-	void contextLoads() {
-		System.out.println("Testing junit 5");
-	}
+    public void contextLoads() {
+    }
 
 }

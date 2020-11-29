@@ -22,6 +22,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
@@ -67,22 +68,33 @@ public class DuckControllerTest {
 	}
 
 	@Test
-	@DisplayName("getDuck()")
+	@DisplayName("getDuck() - positive case")
 	public void testGetDuck() throws Exception  {
 		
 		given(duckService.getDuckById(any())).willReturn(mallardDuck);
 		
-		MvcResult result = mockMvc.perform(get("/api/ducks/" + mallardDuck.getDuckId()))
-								.andExpect(status().isOk())
-								.andDo(print())
-								.andExpect(content().contentType(MediaType.APPLICATION_JSON))
-								.andExpect(jsonPath("$.color", is("BLUE")))
-								.andExpect(jsonPath("$.duckType", is("MALLARD")))
-								.andExpect(jsonPath("$.duckId").value(44))
-								.andExpect(jsonPath("$.size").value(mallardDuck.getSize()))
-								.andReturn();
+		mockMvc.perform(get("/api/ducks/" + mallardDuck.getDuckId()))
+				.andExpect(status().isOk())
+				.andDo(print())
+				.andExpect(content().contentType(MediaType.APPLICATION_JSON))
+				.andExpect(jsonPath("$.color", is("BLUE")))
+				.andExpect(jsonPath("$.duckType", is("MALLARD")))
+				.andExpect(jsonPath("$.duckId").value(44))
+				.andExpect(jsonPath("$.size").value(mallardDuck.getSize()))
+				.andReturn();
+	}
+	
+	@Test
+	@DisplayName("getDuck() - duck not found")
+	public void testGetDuckNull() throws Exception  {
 		
-		System.out.println("Finally something is happening"+result);
+		given(duckService.getDuckById(any())).willReturn(null);
+		
+		mockMvc.perform(get("/api/ducks/" + "33"))
+								.andExpect(status().is4xxClientError())
+								.andExpect(status().is(HttpStatus.NOT_FOUND.value()))
+								.andDo(print())
+								.andReturn();
 	}
 	
 	@DisplayName("getAllDucks")

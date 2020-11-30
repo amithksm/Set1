@@ -79,7 +79,7 @@ public class DuckControllerTest {
 				.andExpect(content().contentType(MediaType.APPLICATION_JSON))
 				.andExpect(jsonPath("$.color", is("BLUE")))
 				.andExpect(jsonPath("$.duckType", is("MALLARD")))
-				.andExpect(jsonPath("$.duckId").value(44))
+				.andExpect(jsonPath("$.duckId", is(Integer.valueOf(44))))
 				.andExpect(jsonPath("$.size").value(mallardDuck.getSize()))
 				.andReturn();
 	}
@@ -89,15 +89,14 @@ public class DuckControllerTest {
 	public void testGetDuckNull() throws Exception  {
 		
 		given(duckService.getDuckById(any())).willReturn(null);
-		
 		mockMvc.perform(get("/api/ducks/" + "33"))
-								.andExpect(status().is4xxClientError())
-								.andExpect(status().is(HttpStatus.NOT_FOUND.value()))
+								.andExpect(status().isOk())
+								.andExpect(jsonPath("$").doesNotExist())
 								.andDo(print())
 								.andReturn();
 	}
 	
-	@DisplayName("getAllDucks")
+	@DisplayName("TestListOperations")
 	@Nested
 	public class TestListOperations{
 		
@@ -132,7 +131,7 @@ public class DuckControllerTest {
 					.andExpect(jsonPath("$", hasSize(2)))
 					.andExpect(jsonPath("$.[0].duckType", is("MALLARD")))
 					.andExpect(jsonPath("$.[0].color", is("BLUE")))
-					.andExpect(jsonPath("$.[0].duckId").value(44))
+					.andExpect(jsonPath("$.[0].duckId", is(Integer.valueOf(mallardDuck.getDuckId().toString()))))
 					.andExpect(jsonPath("$.[1].duckType", is("RUBBER")))
 					.andExpect(jsonPath("$.[1].duckId").value(55))
 					.andExpect(jsonPath("$.[1].color", is("RED")))

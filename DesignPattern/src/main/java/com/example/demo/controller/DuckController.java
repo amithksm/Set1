@@ -52,7 +52,9 @@ public class DuckController {
 	@GetMapping("/ducks/{id}")
 	public ResponseEntity<Duck>  getDuck(@PathVariable Long id) {
 		Duck duck = duckService.getDuckById(id);
+		if(duck != null)
 			return ResponseEntity.status(HttpStatus.OK).body(duck);
+		return ResponseEntity.status(HttpStatus.NOT_FOUND).body(duck);
 	}
 	
 	@DeleteMapping("/ducks/{id}")

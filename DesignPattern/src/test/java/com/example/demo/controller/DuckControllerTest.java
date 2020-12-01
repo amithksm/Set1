@@ -90,13 +90,13 @@ public class DuckControllerTest {
 		
 		given(duckService.getDuckById(any())).willReturn(null);
 		mockMvc.perform(get("/api/ducks/" + "33"))
-								.andExpect(status().isOk())
+								.andExpect(status().isNotFound())
 								.andExpect(jsonPath("$").doesNotExist())
 								.andDo(print())
 								.andReturn();
 	}
 	
-	@DisplayName("TestListOperations")
+	@DisplayName("DuckControllerTest - List Operations")
 	@Nested
 	public class TestListOperations{
 		
@@ -136,7 +136,21 @@ public class DuckControllerTest {
 					.andExpect(jsonPath("$.[1].duckId").value(55))
 					.andExpect(jsonPath("$.[1].color", is("RED")))
 					.andReturn();
+		}
+		
+		@Test
+		@DisplayName("getAllDucks() - no ducks")
+		public void testGetAllDucksNoDucks() throws Exception {
 			
+			duckList.clear();
+			given(duckService.getAll()).willReturn(duckList);
+			
+			mockMvc.perform(get("/api/ducks"))
+					.andExpect(status().isOk())
+					.andDo(print())
+					.andExpect(content().contentType(MediaType.APPLICATION_JSON))
+					.andExpect(jsonPath("$", hasSize(0)))
+					.andReturn();
 		}
 	}
 }
